@@ -1,8 +1,8 @@
 :root {
     /* Palette - Deep Amber CRT */
-    --amber-bright: #ff9e1f;
+    --amber-bright: #ffb000;
     --amber-dim: #b86e00;
-    --amber-glow: rgba(255, 158, 31, 0.45);
+    --amber-glow: rgba(255, 176, 0, 0.45);
 
     --cyan: #00d4ff;
     --green: #00ff88;

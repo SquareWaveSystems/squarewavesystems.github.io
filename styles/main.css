@@ -32,33 +32,33 @@
 
 /* Light Theme - 70s Cassette / Solarized Inspired */
 [data-theme="light"] {
-    /* Primary - Burnt Orange / Rust (70s vibes) */
-    --amber-bright: #c35a1e;
-    --amber-dim: #8b3e12;
-    --amber-glow: rgba(195, 90, 30, 0.25);
+    /* Primary - Terracotta / Rust (warm, earthy) */
+    --amber-bright: #c25620;
+    --amber-dim: #8a3d15;
+    --amber-glow: rgba(194, 86, 32, 0.20);
 
-    /* Accent - Teal (retro tech) */
-    --cyan: #2a7b7b;
+    /* Accent - Warm Teal (shifted green for harmony with orange) */
+    --cyan: #2a7a6a;
 
-    /* Secondary - Olive / Avocado Green (quintessentially 70s) */
-    --green: #5c7c3a;
-    --green-glow: rgba(92, 124, 58, 0.25);
+    /* Secondary - Moss / Sage Green (richer, earthier) */
+    --green: #5a7d3d;
+    --green-glow: rgba(90, 125, 61, 0.22);
 
-    /* Backgrounds - Warm cream/off-white (cassette label aesthetic) */
-    --bg-deep: #f4f1e8;
-    --bg-panel: #ebe7db;
-    --bg-card: #e2ddd0;
+    /* Backgrounds - Warm parchment progression */
+    --bg-deep: #f5f1e6;
+    --bg-panel: #ebe6d8;
+    --bg-card: #e1daca;
 
     /* Grid - subtle warm brown */
-    --grid-line: rgba(139, 62, 18, 0.06);
+    --grid-line: rgba(138, 61, 21, 0.05);
 
-    /* Borders - warm tan */
-    --border-dim: #c9c2b0;
+    /* Borders - warm taupe */
+    --border-dim: #c8c0ad;
 
-    /* Text - warm charcoal/brown */
-    --text-main: #3d3630;
-    --text-muted: #6b6257;
-    --text-dark: #f4f1e8;
+    /* Text - warm charcoal/sepia */
+    --text-main: #3a342d;
+    --text-muted: #695f50;
+    --text-dark: #f5f1e6;
 
     /* Reduced CRT effects for light theme */
     --crt-scanline-opacity: 0.04;
@@ -66,7 +66,7 @@
     --noise-opacity: 0.015;
 
     /* Nav background */
-    --nav-bg: rgba(244, 241, 232, 0.95);
+    --nav-bg: rgba(245, 241, 230, 0.95);
 }
 
 /* --- Reset & Base --- */
@@ -468,7 +468,7 @@ nav {
 
 /* Light theme specific overrides for hardcoded colors */
 [data-theme="light"] .product-visual {
-    background: #e8e4d8;
+    background: #e5dfcf;
 }
 
 [data-theme="light"] .terminal-box {
@@ -477,26 +477,26 @@ nav {
 }
 
 [data-theme="light"] .term-title-bar {
-    background: #6b6257;
+    background: #695f50;
     color: var(--bg-deep);
 }
 
 [data-theme="light"] .term-body {
-    color: #e0dcd0;
+    color: #dfdace;
 }
 
 [data-theme="light"] .data-label {
-    color: #a09888;
+    color: #9e9484;
 }
 
 [data-theme="light"] .status-pill {
-    background: rgba(235, 231, 219, 0.8);
+    background: rgba(235, 230, 216, 0.85);
 }
 
 [data-theme="light"] .schematic-grid {
     background-image:
-        linear-gradient(rgba(42, 123, 123, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(42, 123, 123, 0.08) 1px, transparent 1px);
+        linear-gradient(rgba(42, 122, 106, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42, 122, 106, 0.08) 1px, transparent 1px);
 }
 
 /* Reduce glow intensity in light theme */

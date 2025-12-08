@@ -711,18 +711,29 @@
 
         .email-block {
             margin-top: 2rem;
-            border: 1px solid var(--amber-dim);
+            border: 1px solid var(--amber-bright);
             background: rgba(255, 158, 31, 0.05);
             padding: 1.5rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s;
             position: relative;
+            box-shadow: 0 0 10px rgba(255, 158, 31, 0.1);
         }
 
         .email-block:hover {
-            background: rgba(255, 158, 31, 0.15);
-            box-shadow: 0 0 15px var(--amber-glow);
+            background: var(--green);
+            border-color: var(--green);
+            box-shadow: 0 0 20px var(--green-glow);
+        }
+
+        .email-block:hover .email-address {
+            color: var(--bg-deep);
+            text-shadow: none;
+        }
+
+        .email-block:hover .click-hint {
+            color: var(--bg-deep);
         }
 
         .email-address {
@@ -732,8 +743,10 @@
             margin-bottom: 0.5rem;
             text-shadow: 0 0 5px var(--amber-glow);
             text-decoration: none;
+            word-break: break-all;
+            overflow-wrap: break-word;
         }
-        
+
         .email-address:hover {
             text-decoration: underline;
         }
@@ -802,9 +815,28 @@
             .product-feature, .philosophy-layout { grid-template-columns: 1fr; }
             .product-visual { height: 250px; border-right: none; border-bottom: 1px solid var(--border-dim); }
             .footer-content { flex-direction: column; gap: 1rem; }
-            .email-address { font-size: 1rem; }
+            .email-address {
+                font-size: 1rem;
+                padding: 0 0.5rem;
+            }
+            .email-block {
+                padding: 1rem;
+            }
+            .click-hint {
+                font-size: 0.65rem;
+            }
             nav { padding: 1rem 1.5rem; }
             .logo-text { font-size: 0.9rem; }
+        }
+
+        /* Extra small screens (iPhone SE, small phones) */
+        @media (max-width: 400px) {
+            .email-address {
+                font-size: 0.85rem;
+            }
+            .term-body {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>

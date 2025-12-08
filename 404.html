@@ -1,25 +1,128 @@
----
-permalink: /404.html
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Square Wave Systems</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --amber-bright: #ff9e1f;
+            --amber-glow: rgba(255, 158, 31, 0.45);
+            --green: #00ff88;
+            --bg-deep: #050505;
+            --border-dim: #2a2a2a;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+        }
 
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-<div class="container">
-  <h1>404</h1>
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'IBM Plex Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+        .error-code {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(6rem, 20vw, 12rem);
+            font-weight: 700;
+            color: var(--amber-bright);
+            line-height: 1;
+            text-shadow: 0 0 30px var(--amber-glow);
+            margin-bottom: 1rem;
+        }
+
+        .error-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+        }
+
+        .error-label::before { content: '// '; opacity: 0.5; }
+
+        .terminal-box {
+            background: #000;
+            border: 1px solid var(--border-dim);
+            padding: 1.5rem 2rem;
+            max-width: 400px;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .terminal-line {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .terminal-line:last-child { margin-bottom: 0; }
+
+        .terminal-line span.cmd { color: var(--green); }
+        .terminal-line span.err { color: #ff6b6b; }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1em;
+            background: var(--green);
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: transparent;
+            border: 1px solid var(--amber-bright);
+            color: var(--amber-bright);
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            text-transform: lowercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn::before { content: '> '; }
+
+        .btn:hover {
+            background: var(--green);
+            color: var(--bg-deep);
+            border-color: var(--green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-code">404</div>
+    <div class="error-label">Signal Not Found</div>
+
+    <div class="terminal-box">
+        <div class="terminal-line"><span class="cmd">$</span> locate requested_page</div>
+        <div class="terminal-line"><span class="err">ERROR:</span> No matching entries found</div>
+        <div class="terminal-line"><span class="cmd">$</span> <span class="cursor"></span></div>
+    </div>
+
+    <a href="/" class="btn">return to base</a>
+</body>
+</html>

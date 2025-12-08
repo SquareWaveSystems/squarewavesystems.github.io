@@ -10,15 +10,33 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@700&display=swap" rel="stylesheet">
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     <style>
         :root {
-            --amber-bright: #ff9e1f;
-            --amber-glow: rgba(255, 158, 31, 0.45);
+            --amber-bright: #ffb000;
+            --amber-glow: rgba(255, 176, 0, 0.45);
             --green: #00ff88;
             --bg-deep: #050505;
             --border-dim: #2a2a2a;
             --text-main: #e0e0e0;
             --text-muted: #a0a0a0;
+        }
+
+        [data-theme="light"] {
+            --amber-bright: #c35a1e;
+            --amber-glow: rgba(195, 90, 30, 0.25);
+            --green: #5c7c3a;
+            --bg-deep: #f4f1e8;
+            --border-dim: #c9c2b0;
+            --text-main: #3d3630;
+            --text-muted: #6b6257;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -44,6 +62,22 @@
             line-height: 1;
             text-shadow: 0 0 30px var(--amber-glow);
             margin-bottom: 1rem;
+        }
+
+        [data-theme="light"] .error-code {
+            text-shadow: none;
+        }
+
+        [data-theme="light"] .btn:hover {
+            box-shadow: 0 0 10px rgba(92, 124, 58, 0.3);
+        }
+
+        [data-theme="light"] .terminal-box {
+            background: #3d3630;
+        }
+
+        [data-theme="light"] .terminal-line {
+            color: #a09888;
         }
 
         .error-label {

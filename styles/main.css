@@ -1,5 +1,5 @@
 :root {
-    /* Palette - Deep Amber CRT */
+    /* Palette - Deep Amber CRT (Dark Theme) */
     --amber-bright: #ffb000;
     --amber-dim: #b86e00;
     --amber-glow: rgba(255, 176, 0, 0.45);
@@ -20,6 +20,53 @@
     --text-main: #e0e0e0;
     --text-muted: #a0a0a0; /* Bumped from #808080 for WCAG AA compliance */
     --text-dark: #000000;
+
+    /* CRT overlay opacity (differs per theme) */
+    --crt-scanline-opacity: 0.25;
+    --crt-vignette-opacity: 0.6;
+    --noise-opacity: 0.03;
+
+    /* Nav background */
+    --nav-bg: rgba(5, 5, 5, 0.95);
+}
+
+/* Light Theme - 70s Cassette / Solarized Inspired */
+[data-theme="light"] {
+    /* Primary - Burnt Orange / Rust (70s vibes) */
+    --amber-bright: #c35a1e;
+    --amber-dim: #8b3e12;
+    --amber-glow: rgba(195, 90, 30, 0.25);
+
+    /* Accent - Teal (retro tech) */
+    --cyan: #2a7b7b;
+
+    /* Secondary - Olive / Avocado Green (quintessentially 70s) */
+    --green: #5c7c3a;
+    --green-glow: rgba(92, 124, 58, 0.25);
+
+    /* Backgrounds - Warm cream/off-white (cassette label aesthetic) */
+    --bg-deep: #f4f1e8;
+    --bg-panel: #ebe7db;
+    --bg-card: #e2ddd0;
+
+    /* Grid - subtle warm brown */
+    --grid-line: rgba(139, 62, 18, 0.06);
+
+    /* Borders - warm tan */
+    --border-dim: #c9c2b0;
+
+    /* Text - warm charcoal/brown */
+    --text-main: #3d3630;
+    --text-muted: #6b6257;
+    --text-dark: #f4f1e8;
+
+    /* Reduced CRT effects for light theme */
+    --crt-scanline-opacity: 0.04;
+    --crt-vignette-opacity: 0.15;
+    --noise-opacity: 0.015;
+
+    /* Nav background */
+    --nav-bg: rgba(244, 241, 232, 0.95);
 }
 
 /* --- Reset & Base --- */
@@ -71,21 +118,30 @@ body {
     top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none;
     z-index: 9999;
-    background:
-        /* Scanlines */
-        repeating-linear-gradient(
-            0deg,
-            rgba(0,0,0,0.25) 0px,
-            rgba(0,0,0,0.25) 1px,
-            transparent 1px,
-            transparent 3px
-        ),
-        /* Vignette */
-        radial-gradient(
-            circle at center,
-            transparent 55%,
-            rgba(0,0,0,0.6) 100%
-        );
+}
+
+.crt-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,var(--crt-scanline-opacity)) 0px,
+        rgba(0,0,0,var(--crt-scanline-opacity)) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+}
+
+.crt-overlay::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(
+        circle at center,
+        transparent 55%,
+        rgba(0,0,0,var(--crt-vignette-opacity)) 100%
+    );
 }
 
 /* Noise texture */
@@ -93,7 +149,7 @@ body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.03;
+    opacity: var(--noise-opacity);
     pointer-events: none;
     z-index: 9998;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -228,7 +284,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    background: rgba(5, 5, 5, 0.95);
+    background: var(--nav-bg);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-dim);
 }
@@ -370,12 +426,160 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(5, 5, 5, 0.98);
+    background: var(--nav-bg);
     z-index: 999;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2rem;
+}
+
+/* --- Theme Toggle --- */
+.theme-toggle {
+    background: none;
+    border: 1px solid var(--border-dim);
+    color: var(--text-muted);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-left: 1.5rem;
+}
+
+.theme-toggle:hover {
+    border-color: var(--amber-bright);
+    color: var(--amber-bright);
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Hide moon in dark mode, hide sun in light mode */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+[data-theme="light"] .theme-toggle .icon-sun { display: block; }
+[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+/* Light theme specific overrides for hardcoded colors */
+[data-theme="light"] .product-visual {
+    background: #e8e4d8;
+}
+
+[data-theme="light"] .terminal-box {
+    background: #3d3630;
+    border-color: var(--text-muted);
+}
+
+[data-theme="light"] .term-title-bar {
+    background: #6b6257;
+    color: var(--bg-deep);
+}
+
+[data-theme="light"] .term-body {
+    color: #e0dcd0;
+}
+
+[data-theme="light"] .data-label {
+    color: #a09888;
+}
+
+[data-theme="light"] .status-pill {
+    background: rgba(235, 231, 219, 0.8);
+}
+
+[data-theme="light"] .schematic-grid {
+    background-image:
+        linear-gradient(rgba(42, 123, 123, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42, 123, 123, 0.08) 1px, transparent 1px);
+}
+
+/* Reduce glow intensity in light theme */
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] .glow-text {
+    text-shadow: none;
+}
+
+[data-theme="light"] h1 {
+    text-shadow: none;
+}
+
+[data-theme="light"] .logo svg {
+    filter: none;
+}
+
+[data-theme="light"] .service-icon {
+    filter: none;
+}
+
+[data-theme="light"] .corner-frame {
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+[data-theme="light"] .hero-wave path {
+    filter: none;
+}
+
+[data-theme="light"] .blink-dot {
+    box-shadow: 0 0 4px var(--green);
+}
+
+[data-theme="light"] .h1-cursor {
+    box-shadow: none;
+}
+
+[data-theme="light"] .email-address {
+    text-shadow: none;
+}
+
+[data-theme="light"] .btn {
+    background: rgba(195, 90, 30, 0.08);
+    box-shadow: none;
+}
+
+[data-theme="light"] .btn:hover {
+    box-shadow: 0 0 10px var(--green-glow);
+}
+
+[data-theme="light"] .nav-contact-glitch {
+    text-shadow: none;
+}
+
+[data-theme="light"] .nav-contact-glitch:hover {
+    filter: none;
+    text-shadow: none;
+    box-shadow: 0 0 10px var(--amber-glow);
+}
+
+[data-theme="light"] .logo:hover .logo-text {
+    filter: none;
+}
+
+[data-theme="light"] .logo:hover svg {
+    filter: none;
+}
+
+[data-theme="light"] .h1-link:hover h1 {
+    filter: none;
+}
+
+[data-theme="light"] .service-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .email-block {
+    box-shadow: none;
+}
+
+[data-theme="light"] .email-block:hover {
+    box-shadow: 0 0 10px var(--green-glow);
 }
 
 .mobile-nav.active {
@@ -784,6 +988,11 @@ footer {
     }
     nav { padding: 1rem 1.5rem; }
     .logo-text { font-size: 0.9rem; }
+    .theme-toggle {
+        margin-left: 0;
+        width: 36px;
+        height: 36px;
+    }
 }
 
 /* Extra small screens (iPhone SE, small phones) */

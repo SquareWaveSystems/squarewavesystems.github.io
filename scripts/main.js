@@ -1,3 +1,39 @@
+// Theme toggle with localStorage persistence
+const themeToggle = document.querySelector('.theme-toggle');
+const html = document.documentElement;
+
+// Check for saved theme preference or default to dark
+function getPreferredTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        return savedTheme;
+    }
+    // Default to dark theme (the original CRT aesthetic)
+    return 'dark';
+}
+
+// Apply theme
+function setTheme(theme) {
+    if (theme === 'light') {
+        html.setAttribute('data-theme', 'light');
+    } else {
+        html.removeAttribute('data-theme');
+    }
+    localStorage.setItem('theme', theme);
+}
+
+// Initialize theme on page load
+setTheme(getPreferredTheme());
+
+// Toggle theme on button click
+if (themeToggle) {
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+    });
+}
+
 // Mobile menu toggle
 const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const mobileNav = document.getElementById('mobile-nav');

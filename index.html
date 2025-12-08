@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square Wave Systems | Industrial Automation Software</title>
+    <meta name="description" content="Modern web-based software tools for niche problems in manufacturing and factory automation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette - Deep Amber CRT */
+            --amber-bright: #ff9e1f; 
+            --amber-dim: #b86e00;
+            --amber-glow: rgba(255, 158, 31, 0.45);
+            
+            --cyan: #00d4ff;
+            --green: #00ff88;
+            --green-glow: rgba(0, 255, 136, 0.45);
+            
+            --bg-deep: #050505;
+            --bg-panel: #0a0a0a;
+            --bg-card: #111111;
+            
+            /* Dull Alien Green Grid */
+            --grid-line: rgba(0, 255, 136, 0.04);
+            
+            --border-dim: #2a2a2a;
+            
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0; /* Bumped from #808080 for WCAG AA compliance */
+            --text-dark: #000000;
+        }
+
+        /* --- Reset & Base --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+        
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'IBM Plex Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-size: 16px;
+        }
+
+        /* --- Skip Link for Accessibility --- */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--amber-bright);
+            color: var(--bg-deep);
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            z-index: 10000;
+            transition: top 0.2s;
+        }
+        
+        .skip-link:focus {
+            top: 10px;
+        }
+
+        /* --- CRT Overlay Effects --- */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            background: 
+                /* Scanlines */
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0,0,0,0.25) 0px,
+                    rgba(0,0,0,0.25) 1px,
+                    transparent 1px,
+                    transparent 3px
+                ),
+                /* Vignette */
+                radial-gradient(
+                    circle at center,
+                    transparent 55%,
+                    rgba(0,0,0,0.6) 100%
+                );
+        }
+
+        /* Noise texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 9998;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Bloom */
+        h2, h3, .glow-text {
+            text-shadow: 0 0 8px var(--amber-glow), 0 0 15px rgba(255, 158, 31, 0.2);
+        }
+
+        /* --- Layout Utilities --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--border-dim);
+            position: relative;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+        }
+
+        /* H1 - Sharp Default */
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--amber-bright);
+            line-height: 0.95;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 1px var(--amber-dim); /* Sharp */
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .h1-link {
+            text-decoration: none;
+            color: inherit;
+            display: inline-block;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            color: var(--text-main);
+            margin-bottom: 2rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            max-width: 65ch;
+        }
+
+        .mono-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--amber-bright);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .mono-label::before { content: '// '; opacity: 0.5; }
+
+        /* --- UI Elements --- */
+        .corner-frame {
+            position: fixed;
+            width: 40px; height: 40px;
+            border: 2px solid var(--amber-bright);
+            z-index: 100;
+            pointer-events: none;
+            opacity: 0.8;
+            box-shadow: 0 0 10px var(--amber-glow);
+        }
+        .tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+        .tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+        .bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+        .br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 158, 31, 0.05);
+            border: 1px solid var(--amber-bright);
+            color: var(--amber-bright);
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            text-transform: lowercase;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(255, 158, 31, 0.1);
+        }
+        
+        .btn::before { content: '> '; margin-right: 0.5rem; }
+
+        /* Green Hover State */
+        .btn:hover {
+            background: var(--green);
+            color: var(--bg-deep);
+            border-color: var(--green);
+            box-shadow: 0 0 20px var(--green-glow);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-dim);
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            color: var(--amber-bright);
+            text-decoration: none;
+            font-size: 1.1rem;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            /* Sharp default */
+            text-shadow: 0 0 1px var(--amber-dim);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .logo svg { 
+            width: 28px; 
+            height: 28px; 
+            filter: drop-shadow(0 0 5px var(--amber-glow));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { 
+            color: var(--amber-bright); 
+            text-shadow: 0 0 8px var(--amber-glow);
+        }
+
+        /* --- Glitch Keyframes (Standard 3px offset) --- */
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); text-shadow: none; }
+            10% { transform: skew(0deg); text-shadow: none; }
+            11% { transform: skew(-2deg); text-shadow: 3px 0 var(--amber-dim), -3px 0 var(--amber-bright); }
+            12% { transform: skew(2deg); text-shadow: -3px 0 var(--amber-dim), 3px 0 var(--amber-bright); }
+            13% { transform: skew(0deg); text-shadow: none; }
+            100% { transform: skew(0deg); text-shadow: none; }
+        }
+
+        /* Nav Contact - Glitch on Hover Only (no constant animation) */
+        .nav-contact-glitch {
+            color: var(--amber-bright) !important;
+            font-weight: 600;
+            position: relative;
+            text-shadow: 0 0 5px var(--amber-glow);
+            transition: all 0.15s ease;
+            padding: 0.4rem 0.8rem;
+            margin: -0.4rem -0.8rem;
+            border: 1px solid transparent;
+        }
+
+        /* Contact Hover (Intense glow + scale + border) */
+        .nav-contact-glitch:hover {
+            animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            filter: drop-shadow(0 0 25px var(--amber-glow));
+            text-shadow: 0 0 10px var(--amber-bright), 0 0 20px var(--amber-glow), 0 0 40px var(--amber-glow);
+            background: rgba(255, 158, 31, 0.1);
+            border-color: var(--amber-bright);
+            box-shadow: 0 0 20px var(--amber-glow), inset 0 0 15px rgba(255, 158, 31, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* --- Logo Hover (Aggressive Match to Main Title) --- */
+        .logo:hover .logo-text {
+            animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            color: var(--amber-bright);
+            filter: drop-shadow(0 0 20px var(--amber-glow));
+        }
+        
+        .logo:hover svg {
+            filter: drop-shadow(0 0 15px var(--amber-glow));
+        }
+
+        /* Title Hover (Big Glow + Glitch) */
+        .h1-link:hover h1 {
+            animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+            filter: drop-shadow(0 0 20px var(--amber-glow)); 
+        }
+
+        /* --- Mobile Menu --- */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--amber-bright);
+            color: var(--amber-bright);
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            position: relative;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 10px;
+        }
+        
+        .mobile-menu-btn span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--amber-bright);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn[aria-expanded="true"] span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .mobile-menu-btn[aria-expanded="true"] span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu-btn[aria-expanded="true"] span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(5, 5, 5, 0.98);
+            z-index: 999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .mobile-nav.active {
+            display: flex;
+        }
+        
+        .mobile-nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1rem 2rem;
+            transition: all 0.2s;
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--amber-bright);
+            text-shadow: 0 0 10px var(--amber-glow);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            
+            /* Static Tactical Grid (Alien Green) */
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center;
+            
+            mask-image: radial-gradient(circle at center, black 30%, transparent 100%);
+        }
+
+        /* Center the Hero Text Properly */
+        .hero p {
+            max-width: 50ch;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        /* H1 Cursor Animation */
+        .h1-cursor {
+            display: inline-block;
+            width: 0.6em;
+            height: 0.8em;
+            background: var(--amber-bright);
+            margin-left: 0.1em;
+            vertical-align: baseline;
+            animation: cursorBlink 1s step-end infinite;
+            box-shadow: none; 
+        }
+
+        @keyframes cursorBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Status Pill */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border: 1px solid var(--border-dim);
+            background: rgba(18, 18, 18, 0.6);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.05);
+            border-radius: 50px;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .blink-dot {
+            width: 8px; height: 8px;
+            background-color: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--green);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        .hero-wave-container {
+            width: 100%;
+            max-width: 800px;
+            height: 80px;
+            margin: 1rem auto 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-wave path {
+            stroke: var(--amber-bright);
+            stroke-width: 2.5;
+            fill: none;
+            filter: drop-shadow(0 0 6px var(--amber-glow));
+            
+            /* Width calculation matches the extended SVG width */
+            stroke-dasharray: 3000; 
+            stroke-dashoffset: 3000;
+            
+            /* Plays once on load */
+            animation: drawWave 2.5s ease-out forwards;
+        }
+
+        @keyframes drawWave {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* --- Services Grid --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
+            padding: 2.5rem;
+            transition: transform 0.3s, border-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            border-color: var(--amber-dim);
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(255, 158, 31, 0.05);
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(255,158,31,0.08), transparent);
+            transform: translateY(-100%);
+            transition: transform 0.6s;
+        }
+        .service-card:hover::after { transform: translateY(100%); }
+
+        .service-icon {
+            color: var(--amber-bright);
+            width: 32px; height: 32px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 0 5px var(--amber-glow));
+        }
+
+        /* --- Products Section --- */
+        .product-feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
+            margin-top: 3rem;
+            align-items: center;
+        }
+
+        .product-visual {
+            background: #08090a;
+            height: 400px;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-right: 1px solid var(--border-dim);
+        }
+
+        .schematic-grid {
+            position: absolute;
+            width: 200%; height: 200%;
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-100px);
+        }
+
+        .product-content { padding: 3rem; }
+
+        .tech-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 2rem; }
+        .tag {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            border: 1px solid var(--border-dim);
+            color: var(--cyan);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        /* --- Philosophy Section --- */
+        .philosophy-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .manifesto p {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .manifesto p.highlight {
+            color: var(--amber-bright);
+            font-weight: 500;
+            text-shadow: 0 0 5px var(--amber-glow);
+        }
+
+        .values-list {
+            list-style: none;
+            border-left: 2px solid var(--amber-dim);
+            padding-left: 2rem;
+        }
+
+        .values-list li {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .values-list li h4 {
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 0.25rem;
+        }
+
+        .values-list li p {
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+
+        /* --- Contact Terminal --- */
+        .terminal-box {
+            background: #000;
+            border: 1px solid var(--text-muted);
+            padding: 0;
+            font-family: 'IBM Plex Mono', monospace;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 0 30px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .term-title-bar {
+            background: var(--text-muted);
+            color: #000;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .term-body {
+            padding: 2.5rem;
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px dashed var(--border-dim);
+            padding: 0.75rem 0;
+        }
+
+        .data-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;}
+        .data-val { color: var(--amber-bright); text-align: right; }
+
+        .email-block {
+            margin-top: 2rem;
+            border: 1px solid var(--amber-dim);
+            background: rgba(255, 158, 31, 0.05);
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .email-block:hover {
+            background: rgba(255, 158, 31, 0.15);
+            box-shadow: 0 0 15px var(--amber-glow);
+        }
+
+        .email-address {
+            font-size: 1.25rem;
+            color: var(--amber-bright);
+            display: block;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 5px var(--amber-glow);
+            text-decoration: none;
+        }
+        
+        .email-address:hover {
+            text-decoration: underline;
+        }
+
+        .click-hint {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .cursor-block {
+            display: inline-block;
+            width: 10px;
+            height: 1.1em;
+            background: var(--green);
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 2.5rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-dim);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--amber-bright);
+        }
+        
+        .footer-links svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .corner-frame { display: none; }
+            .product-feature, .philosophy-layout { grid-template-columns: 1fr; }
+            .product-visual { height: 250px; border-right: none; border-bottom: 1px solid var(--border-dim); }
+            .footer-content { flex-direction: column; gap: 1rem; }
+            .email-address { font-size: 1rem; }
+            nav { padding: 1rem 1.5rem; }
+            .logo-text { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="crt-overlay"></div>
+
+    <div class="corner-frame tl"></div>
+    <div class="corner-frame tr"></div>
+    <div class="corner-frame bl"></div>
+    <div class="corner-frame br"></div>
+
+    <nav>
+        <a href="#" class="logo" aria-label="Square Wave Systems - Back to top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="4" stroke="var(--amber-bright)" stroke-width="2"/>
+                <path d="M5 12 h4 v-5 h6 v10 h4" stroke="var(--amber-bright)" stroke-width="2" stroke-linecap="square"/>
+            </svg>
+            <span class="logo-text">SQUARE WAVE SYSTEMS</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#contact" class="nav-contact-glitch">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    
+    <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#projects">Projects</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <main id="main-content">
+        <section class="hero">
+            <div class="container">
+                
+                <a href="#contact" class="h1-link">
+                    <h1>Square Wave<br>Systems<span class="h1-cursor" aria-hidden="true"></span></h1>
+                </a>
+                
+                <div class="hero-wave-container" aria-hidden="true">
+                    <svg class="hero-wave" viewBox="0 0 1200 80" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+                        <path d="M0 40 L40 40 L40 10 L80 10 L80 70 L120 70 L120 40 L160 40 L160 10 L200 10 L200 70 L240 70 L240 40 L280 40 L280 10 L320 10 L320 70 L360 70 L360 40 L400 40 L400 10 L440 10 L440 70 L480 70 L480 40 L520 40 L520 10 L560 10 L560 70 L600 70 L600 40 L640 40 L640 10 L680 10 L680 70 L720 70 L720 40 L760 40 L760 10 L800 10 L800 70 L840 70 L840 40 L880 40 L880 10 L920 10 L920 70 L960 70 L960 40 L1000 40 L1000 10 L1040 10 L1040 70 L1080 70 L1080 40 L1120 40 L1120 10 L1160 10 L1160 70 L1200 70" />
+                    </svg>
+                </div>
+
+                <div class="status-pill">
+                    <span class="blink-dot" aria-hidden="true"></span>
+                    ALL SYSTEMS NOMINAL
+                </div>
+
+                <p style="font-size: 1.1rem; color: var(--text-main);">
+                    Modern software solutions for niche problems in industrial automation.<br>
+                    We bridge the gap between cutting-edge development and factory floor reality.
+                </p>
+                
+                <div style="margin-top: 3rem;">
+                    <a href="#contact" class="btn">establish connection</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="capabilities">
+            <div class="container">
+                <span class="mono-label">Capabilities</span>
+                <h2>What We Build</h2>
+                <p>We sit at the intersection of OT and IT. We apply modern software engineering rigor—CI/CD, version control, open standards—to the rigid world of industrial automation.</p>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        <h3>Web-Based Digital Twins</h3>
+                        <p>High-fidelity 3D environments running natively in the browser. We build lightweight digital twins and simulation tools using Three.js and WebGL. Visualize complex machinery or facility data without the overhead of heavy CAD workstations.</p>
+                    </div>
+                    
+                    <div class="service-card">
+                        <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <h3>Custom Engineering Tools</h3>
+                        <p>Utilities for the automation workflow. We build version control wrappers for binary PLC files, IEC 61131 code generation scripts, and CLI tools that bring modern DevOps practices to the control room.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <svg class="service-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <h3>Software Integration</h3>
+                        <p>Automated workflows that connect the shop floor to the cloud. We utilize Node-RED, n8n, and custom middleware to bridge industrial protocols with modern APIs. Robust data pipelines, not just brittle scripts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <span class="mono-label">Projects</span>
+                <h2>Active Development</h2>
+                
+                <!-- Product 1: Factory Layout Planner -->
+                <div class="product-feature">
+                    <div class="product-visual">
+                        <div class="schematic-grid"></div>
+                        <svg viewBox="0 0 400 300" width="100%" height="100%" style="z-index: 1;" aria-hidden="true">
+                            <defs>
+                                <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+            
+                            <!-- Simplified Isometric Floor Grid -->
+                            <g transform="translate(200, 200)">
+                                <!-- Floor plane -->
+                                <path d="M-120 0 L0 -60 L120 0 L0 60 Z" fill="rgba(0, 212, 255, 0.03)" stroke="rgba(0, 212, 255, 0.15)" stroke-width="1"/>
+                                <!-- Grid lines -->
+                                <path d="M-80 -20 L40 -80 M-40 -40 L80 -100" stroke="rgba(0, 212, 255, 0.08)" stroke-width="1" fill="none"/>
+                                <path d="M-80 20 L40 40 M-40 40 L80 20" stroke="rgba(0, 212, 255, 0.08)" stroke-width="1" fill="none"/>
+                            </g>
+            
+                            <!-- Machine 1 - Simple Box -->
+                            <g transform="translate(140, 160)">
+                                <path d="M0 0 L30 -15 L60 0 L30 15 Z" fill="rgba(0, 212, 255, 0.1)" stroke="var(--cyan)" stroke-width="1.5"/>
+                                <path d="M0 0 L0 -25 L30 -40 L30 -15" fill="rgba(0, 212, 255, 0.05)" stroke="var(--cyan)" stroke-width="1.5"/>
+                                <path d="M30 -15 L30 -40 L60 -25 L60 0" fill="rgba(0, 212, 255, 0.08)" stroke="var(--cyan)" stroke-width="1.5"/>
+                            </g>
+            
+                            <!-- Machine 2 - Selected (Amber) -->
+                            <g transform="translate(220, 180)">
+                                <path d="M0 0 L25 -12 L50 0 L25 12 Z" fill="rgba(255, 158, 31, 0.15)" stroke="var(--amber-bright)" stroke-width="2"/>
+                                <path d="M0 0 L0 -20 L25 -32 L25 -12" fill="rgba(255, 158, 31, 0.1)" stroke="var(--amber-bright)" stroke-width="2"/>
+                                <path d="M25 -12 L25 -32 L50 -20 L50 0" fill="rgba(255, 158, 31, 0.12)" stroke="var(--amber-bright)" stroke-width="2"/>
+                                <!-- Selection indicator -->
+                                <circle cx="25" cy="-45" r="4" fill="var(--amber-bright)" filter="url(#glow-cyan)"/>
+                                <path d="M25 -41 L25 -32" stroke="var(--amber-bright)" stroke-width="1.5"/>
+                            </g>
+            
+                            <!-- Machine 3 - Conveyor -->
+                            <g transform="translate(280, 150)">
+                                <path d="M0 0 L50 -25 L60 -20 L10 5 Z" fill="rgba(0, 212, 255, 0.08)" stroke="var(--cyan)" stroke-width="1"/>
+                                <circle cx="8" cy="-2" r="3" fill="none" stroke="var(--cyan)" stroke-width="1"/>
+                                <circle cx="52" cy="-22" r="3" fill="none" stroke="var(--cyan)" stroke-width="1"/>
+                            </g>
+            
+                            <!-- Cursor / Pointer -->
+                            <g transform="translate(245, 105)">
+                                <path d="M0 0 L0 18 L5 14 L9 22 L12 20 L8 12 L14 12 Z" fill="var(--green)" stroke="var(--bg-deep)" stroke-width="1"/>
+                            </g>
+            
+                            <!-- Info Panel -->
+                            <g transform="translate(270, 95)">
+                                <rect x="0" y="0" width="90" height="45" fill="rgba(0,0,0,0.85)" stroke="var(--amber-bright)" stroke-width="1" rx="2"/>
+                                <text x="8" y="15" fill="var(--amber-dim)" font-family="monospace" font-size="8">MACHINE_02</text>
+                                <text x="8" y="27" fill="var(--green)" font-family="monospace" font-size="8">POS: 220, 180</text>
+                                <text x="8" y="39" fill="var(--text-muted)" font-family="monospace" font-size="8">STATUS: IDLE</text>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="product-content">
+                        <span class="status-pill" style="margin-bottom: 1rem; display: inline-block;">In Development</span>
+                        <h3>Factory Layout Planner</h3>
+                        <p>A lightweight, browser-based tool for sketching factory floors. Rapidly prototype layouts and visualize equipment placement in real-time.</p>
+                        <p>Built because CAD is too slow for brainstorming, and enterprise digital twin software is too expensive for small shops.</p>
+                        
+                        <div class="tech-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Three.js</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">WebGL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2: Sysmac Version Control -->
+                <div class="product-feature" style="margin-top: 2rem;">
+                    <div class="product-visual">
+                        <div class="schematic-grid" style="opacity: 0.5;"></div>
+                        <svg viewBox="0 0 400 300" width="100%" height="100%" style="z-index: 1;" aria-hidden="true">
+                            <defs>
+                                <filter id="glow-green" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+            
+                            <!-- Git Branch Visualization -->
+                            <g transform="translate(80, 150)">
+                                <!-- Main branch line -->
+                                <path d="M0 0 L240 0" stroke="var(--green)" stroke-width="2" filter="url(#glow-green)"/>
+                                
+                                <!-- Commits on main -->
+                                <circle cx="0" cy="0" r="8" fill="var(--bg-deep)" stroke="var(--green)" stroke-width="2"/>
+                                <circle cx="80" cy="0" r="8" fill="var(--bg-deep)" stroke="var(--green)" stroke-width="2"/>
+                                <circle cx="160" cy="0" r="8" fill="var(--bg-deep)" stroke="var(--green)" stroke-width="2"/>
+                                <circle cx="240" cy="0" r="8" fill="var(--green)" stroke="var(--green)" stroke-width="2"/>
+                                
+                                <!-- Feature branch -->
+                                <path d="M80 0 Q100 -40 120 -50 L180 -50 Q200 -50 200 -30 L200 0" stroke="var(--amber-bright)" stroke-width="2" fill="none"/>
+                                <circle cx="120" cy="-50" r="6" fill="var(--bg-deep)" stroke="var(--amber-bright)" stroke-width="2"/>
+                                <circle cx="160" cy="-50" r="6" fill="var(--bg-deep)" stroke="var(--amber-bright)" stroke-width="2"/>
+                                
+                                <!-- Labels -->
+                                <text x="240" y="25" fill="var(--green)" font-family="monospace" font-size="10" text-anchor="middle">main</text>
+                                <text x="140" y="-65" fill="var(--amber-bright)" font-family="monospace" font-size="10" text-anchor="middle">feature/new-fb</text>
+                            </g>
+            
+                            <!-- Diff Panel -->
+                            <g transform="translate(100, 200)">
+                                <rect x="0" y="0" width="200" height="70" fill="rgba(0,0,0,0.9)" stroke="var(--border-dim)" stroke-width="1" rx="3"/>
+                                
+                                <!-- Diff lines -->
+                                <text x="10" y="18" fill="var(--text-muted)" font-family="monospace" font-size="9">  VAR_GLOBAL</text>
+                                <text x="10" y="32" fill="#ff6b6b" font-family="monospace" font-size="9">- speed : INT := 100;</text>
+                                <text x="10" y="46" fill="var(--green)" font-family="monospace" font-size="9">+ speed : INT := 150;</text>
+                                <text x="10" y="60" fill="var(--text-muted)" font-family="monospace" font-size="9">  END_VAR</text>
+                            </g>
+            
+                            <!-- File icons -->
+                            <g transform="translate(60, 60)">
+                                <rect x="0" y="0" width="35" height="45" fill="var(--bg-panel)" stroke="var(--cyan)" stroke-width="1" rx="2"/>
+                                <path d="M25 0 L35 10" stroke="var(--cyan)" stroke-width="1"/>
+                                <path d="M25 0 L25 10 L35 10" stroke="var(--cyan)" stroke-width="1" fill="var(--bg-deep)"/>
+                                <text x="17" y="32" fill="var(--cyan)" font-family="monospace" font-size="7" text-anchor="middle">.smc2</text>
+                            </g>
+            
+                            <g transform="translate(280, 60)">
+                                <rect x="0" y="0" width="35" height="45" fill="var(--bg-panel)" stroke="var(--green)" stroke-width="1" rx="2"/>
+                                <path d="M25 0 L35 10" stroke="var(--green)" stroke-width="1"/>
+                                <path d="M25 0 L25 10 L35 10" stroke="var(--green)" stroke-width="1" fill="var(--bg-deep)"/>
+                                <text x="17" y="32" fill="var(--green)" font-family="monospace" font-size="7" text-anchor="middle">.st</text>
+                            </g>
+            
+                            <!-- Arrow between files -->
+                            <path d="M105 82 L270 82" stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="4 2"/>
+                            <path d="M265 78 L275 82 L265 86" fill="var(--text-muted)"/>
+                            <text x="187" y="75" fill="var(--text-muted)" font-family="monospace" font-size="8" text-anchor="middle">EXTRACT</text>
+                        </svg>
+                    </div>
+                    <div class="product-content">
+                        <span class="status-pill" style="margin-bottom: 1rem; display: inline-block; color: var(--amber-bright); border-color: var(--amber-dim);">
+                            <span class="blink-dot" style="background: var(--amber-bright); box-shadow: 0 0 8px var(--amber-bright);"></span>
+                            Coming Soon
+                        </span>
+                        <h3>Sysmac Studio Version Control</h3>
+                        <p>Git-compatible version control for Omron Sysmac Studio projects. Extract PLC code to plain text for proper diffs, reviews, and collaboration.</p>
+                        <p>Features include plain text editing, visual diffs, patch generation, merge support, and seamless Git integration. Stop emailing ZIP files.</p>
+                        
+                        <div class="tech-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Git</span>
+                            <span class="tag">IEC 61131-3</span>
+                            <span class="tag">Omron</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="philosophy">
+            <div class="container">
+                <span class="mono-label">Philosophy</span>
+                <h2>About Us</h2>
+                
+                <div class="philosophy-layout">
+                    <div class="manifesto">
+                        <p class="highlight">Square Wave Systems is a bootstrapped software shop on the Gold Coast. We are engineers building the tools we wanted to use ourselves.</p>
+                        <p>Industrial automation deserves better software. For too long, the industry has relied on clunky, expensive, proprietary suites that feel like they were designed in Windows 95.</p>
+                        <p>We combine deep domain expertise in factory automation with modern web engineering. We respect the reliability of the old hardware, but we demand the usability of modern software.</p>
+                    </div>
+                    
+                    <ul class="values-list">
+                        <li>
+                            <h4>Niche Focus</h4>
+                            <p>We solve specific problems. We don't try to be SCADA or an ERP.</p>
+                        </li>
+                        <li>
+                            <h4>No Magic</h4>
+                            <p>Clear documentation. Standard protocols. No black boxes.</p>
+                        </li>
+                        <li>
+                            <h4>Honest Engineering</h4>
+                            <p>We'll tell you if our software isn't the right fit for your problem.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <span class="mono-label">Contact</span>
+                <h2>Establish Connection</h2>
+                <p>Have a weird automation problem? Let's talk.</p>
+                
+                <div class="terminal-box">
+                    <div class="term-title-bar">
+                        <span>SYS_ADMIN: ~/GUEST/CONTACT_INFO</span>
+                        <span><span class="cursor-block" style="width: 8px; height: 10px;" aria-hidden="true"></span> CONNECTED</span>
+                    </div>
+                    
+                    <div class="term-body">
+                        <div class="data-row">
+                            <span class="data-label">Entity</span>
+                            <span class="data-val">Square Wave Systems</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Location</span>
+                            <span class="data-val">Gold Coast, QLD [AU]</span>
+                        </div>
+                        <div class="data-row">
+                            <span class="data-label">Status</span>
+                            <span class="data-val" style="color: var(--green);">Accepting Projects</span>
+                        </div>
+                        <div class="data-row" style="border-bottom: none;">
+                            <span class="data-label">Timezone</span>
+                            <span class="data-val">AEST [UTC+10]</span>
+                        </div>
+
+                        <div class="email-block" id="email-trigger" role="button" tabindex="0" aria-label="Copy email address to clipboard">
+                            <a href="mailto:hello@squarewavesystems.com.au" class="email-address" onclick="event.stopPropagation();">hello@squarewavesystems.com.au</a>
+                            <span class="click-hint" id="click-msg">[ CLICK_TO_COPY_ADDRESS ]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div>
+                <strong>SQUARE WAVE SYSTEMS PTY LTD</strong>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/SquareWaveSystems/" target="_blank" rel="noopener noreferrer" aria-label="Square Wave Systems on GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+                <span>&copy; 2025. All systems nominal.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        
+        if (mobileMenuBtn && mobileNav) {
+            mobileMenuBtn.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                mobileNav.classList.toggle('active');
+                document.body.style.overflow = isExpanded ? '' : 'hidden';
+            });
+            
+            // Close menu when clicking a link
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                    mobileNav.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Copy to clipboard functionality for email with visual feedback
+        const emailTrigger = document.getElementById('email-trigger');
+        const clickMsg = document.getElementById('click-msg');
+        
+        function copyEmail() {
+            const email = "hello@squarewavesystems.com.au";
+            navigator.clipboard.writeText(email).then(function() {
+                clickMsg.textContent = "[ COPIED_TO_CLIPBOARD ]";
+                clickMsg.style.color = "var(--green)";
+                emailTrigger.style.borderColor = "var(--green)";
+                
+                setTimeout(function() {
+                    clickMsg.textContent = "[ CLICK_TO_COPY_ADDRESS ]";
+                    clickMsg.style.color = "var(--text-muted)";
+                    emailTrigger.style.borderColor = "var(--amber-dim)";
+                }, 2000);
+            });
+        }
+        
+        if(emailTrigger) {
+            emailTrigger.addEventListener('click', function(e) {
+                // Don't copy if clicking the actual mailto link
+                if (e.target.tagName !== 'A') {
+                    copyEmail();
+                }
+            });
+            
+            // Keyboard accessibility
+            emailTrigger.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    copyEmail();
+                }
+            });
+        }
+
+        // Smooth reveal on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section h2, section > .container > p, .service-card, .product-feature').forEach(el => {
+            el.style.opacity = "0";
+            el.style.transform = "translateY(20px)";
+            el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

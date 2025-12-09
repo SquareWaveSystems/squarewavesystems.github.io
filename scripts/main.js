@@ -61,7 +61,12 @@ const emailTrigger = document.getElementById('email-trigger');
 const clickMsg = document.getElementById('click-msg');
 
 function copyEmail() {
-    const email = "hello@squarewavesystems.com.au";
+    // Read email from the mailto link to maintain single source of truth
+    const emailLink = emailTrigger.querySelector('.email-address');
+    const email = emailLink ? emailLink.href.replace('mailto:', '') : '';
+
+    if (!email) return;
+
     navigator.clipboard.writeText(email).then(function() {
         clickMsg.textContent = "[ COPIED_TO_CLIPBOARD ]";
         clickMsg.style.color = "var(--green)";
@@ -100,15 +105,12 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
+            entry.target.classList.add('active');
         }
     });
 }, observerOptions);
 
 document.querySelectorAll('section h2, section > .container > p, .service-card, .product-feature').forEach(el => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(20px)";
-    el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+    el.classList.add('reveal');
     observer.observe(el);
 });

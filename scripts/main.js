@@ -131,3 +131,11 @@ if (establishConnectionBtn) {
         }, 400);
     });
 }
+
+// Disable hero title navigation but keep hover effects
+const heroTitleLink = document.querySelector('.h1-link');
+if (heroTitleLink) {
+    heroTitleLink.addEventListener('click', (e) => {
+        e.preventDefault();
+    });
+}

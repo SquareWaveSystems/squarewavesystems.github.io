@@ -395,10 +395,10 @@ nav {
 .mobile-menu-btn {
     display: none;
     background: none;
-    border: 1px solid var(--amber-bright);
+    border: none;
     color: var(--amber-bright);
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
     position: relative;
     flex-direction: column;
@@ -406,6 +406,11 @@ nav {
     align-items: center;
     gap: 5px;
     padding: 10px;
+    transition: all 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+    opacity: 0.7;
 }
 
 .mobile-menu-btn span {
@@ -444,7 +449,7 @@ nav {
 /* --- Theme Toggle --- */
 .theme-toggle {
     background: none;
-    border: 1px solid var(--border-dim);
+    border: none;
     color: var(--text-muted);
     width: 40px;
     height: 40px;
@@ -457,7 +462,6 @@ nav {
 }
 
 .theme-toggle:hover {
-    border-color: var(--amber-bright);
     color: var(--amber-bright);
 }
 
@@ -944,7 +948,8 @@ footer {
     }
     nav { padding: 1rem 1.5rem; }
     .logo-text { font-size: 0.9rem; }
-    .theme-toggle {
+    .theme-toggle,
+    .mobile-menu-btn {
         margin-left: 0;
         width: 36px;
         height: 36px;

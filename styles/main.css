@@ -1,8 +1,8 @@
 :root {
     /* Palette - Deep Amber CRT (Dark Theme) */
-    --amber-bright: #ffb000;
-    --amber-dim: #b86e00;
-    --amber-glow: rgba(255, 176, 0, 0.45);
+    --amber-bright: #ff8c00;
+    --amber-dim: #cc5500;
+    --amber-glow: rgba(255, 140, 0, 0.45);
 
     --cyan: #00d4ff;
     --green: #00ff88;
@@ -30,35 +30,35 @@
     --nav-bg: rgba(5, 5, 5, 0.95);
 }
 
-/* Light Theme - 70s Cassette / Solarized Inspired */
+/* Light Theme - Clean Industrial */
 [data-theme="light"] {
-    /* Primary - Terracotta / Rust (warm, earthy) */
-    --amber-bright: #c25620;
-    --amber-dim: #8a3d15;
-    --amber-glow: rgba(194, 86, 32, 0.20);
+    /* Primary - Deep Orange (consistent with dark theme) */
+    --amber-bright: #d65a00;
+    --amber-dim: #a04000;
+    --amber-glow: rgba(214, 90, 0, 0.20);
 
-    /* Accent - Warm Teal (shifted green for harmony with orange) */
-    --cyan: #2a7a6a;
+    /* Accent - Teal (consistent with dark theme) */
+    --cyan: #008899;
 
-    /* Secondary - Moss / Sage Green (richer, earthier) */
-    --green: #5a7d3d;
-    --green-glow: rgba(90, 125, 61, 0.22);
+    /* Secondary - Deep Green (consistent with dark theme) */
+    --green: #008855;
+    --green-glow: rgba(0, 136, 85, 0.22);
 
-    /* Backgrounds - Warm parchment progression */
-    --bg-deep: #f5f1e6;
-    --bg-panel: #ebe6d8;
-    --bg-card: #e1daca;
+    /* Backgrounds - Warm light grey */
+    --bg-deep: #f4f3f0;
+    --bg-panel: #eae9e4;
+    --bg-card: #e0dfda;
 
-    /* Grid - subtle warm brown */
-    --grid-line: rgba(138, 61, 21, 0.05);
+    /* Grid - subtle orange tint */
+    --grid-line: rgba(214, 90, 0, 0.05);
 
-    /* Borders - warm taupe */
-    --border-dim: #c8c0ad;
+    /* Borders - warm grey */
+    --border-dim: #c5c3bc;
 
-    /* Text - warm charcoal/sepia */
-    --text-main: #3a342d;
-    --text-muted: #695f50;
-    --text-dark: #f5f1e6;
+    /* Text - dark charcoal */
+    --text-main: #2a2a2a;
+    --text-muted: #5a5a5a;
+    --text-dark: #f4f3f0;
 
     /* Reduced CRT effects for light theme */
     --crt-scanline-opacity: 0.04;
@@ -66,7 +66,7 @@
     --noise-opacity: 0.015;
 
     /* Nav background */
-    --nav-bg: rgba(245, 241, 230, 0.95);
+    --nav-bg: rgba(244, 243, 240, 0.95);
 }
 
 /* --- Reset & Base --- */
@@ -267,6 +267,21 @@ p {
 
 .btn::before { content: '> '; margin-right: 0.5rem; }
 
+/* Button cursor animation */
+.btn-cursor {
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    background: var(--amber-bright);
+    margin-left: 0.3em;
+    vertical-align: middle;
+    animation: cursorBlink 1s step-end infinite;
+}
+
+.btn:hover .btn-cursor {
+    background: var(--bg-deep);
+}
+
 /* Green Hover State */
 .btn:hover {
     background: var(--green);
@@ -287,6 +302,18 @@ nav {
     background: var(--nav-bg);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-dim);
+}
+
+/* Center nav-links absolutely for true centering on desktop */
+@media (min-width: 769px) {
+    nav {
+        position: fixed;
+    }
+    .nav-links {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
 }
 
 .logo {
@@ -472,31 +499,35 @@ nav {
 }
 
 [data-theme="light"] .terminal-box {
-    background: #073642;
-    border-color: var(--text-muted);
+    background: #1a1a1a;
+    border-color: var(--amber-dim);
 }
 
 [data-theme="light"] .term-title-bar {
-    background: #695f50;
-    color: var(--bg-deep);
+    background: #2d2d2d;
+    color: var(--amber-bright);
 }
 
 [data-theme="light"] .term-body {
-    color: #dfdace;
+    color: #e0e0e0;
 }
 
 [data-theme="light"] .data-label {
-    color: #9e9484;
+    color: #888888;
+}
+
+[data-theme="light"] .data-val {
+    color: var(--amber-bright);
 }
 
 [data-theme="light"] .status-pill {
-    background: rgba(235, 230, 216, 0.85);
+    background: rgba(234, 233, 228, 0.85);
 }
 
 [data-theme="light"] .schematic-grid {
     background-image:
-        linear-gradient(rgba(42, 122, 106, 0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(42, 122, 106, 0.08) 1px, transparent 1px);
+        linear-gradient(rgba(0, 136, 153, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 136, 153, 0.08) 1px, transparent 1px);
 }
 
 /* Reduce glow intensity in light theme */

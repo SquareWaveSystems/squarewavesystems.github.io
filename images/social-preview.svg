@@ -1,67 +1,57 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" style="background-color: #050300;">
-  <defs>
-    <pattern id="scanlines-subtle" x="0" y="0" width="100%" height="4" patternUnits="userSpaceOnUse">
-      <rect x="0" y="1" width="100%" height="1" fill="#000000" opacity="0.25"/>
-    </pattern>
-    
-    <filter id="sharp-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="tightBlur"/>
-      <feFlood flood-color="#ffb000" result="floodColor"/>
-      <feComposite in="floodColor" in2="tightBlur" operator="in" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur" opacity="1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+  <defs>
+    <pattern id="scanlines-subtle" x="0" y="0" width="100%" height="4" patternUnits="userSpaceOnUse">
+      <rect x="0" y="1" width="100%" height="1" fill="#000000" opacity="0.25"/>
+    </pattern>
+    
+    <radialGradient id="crt-vignette-wide" cx="50%" cy="50%" r="85%" fx="50%" fy="50%">
+      <stop offset="60%" stop-color="#050300" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.7"/>
+    </radialGradient>
+  </defs>
 
-    <radialGradient id="crt-vignette-wide" cx="50%" cy="50%" r="80%" fx="50%" fy="50%">
-      <stop offset="70%" stop-color="#050300" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0.6"/>
-    </radialGradient>
-  </defs>
+  <rect width="100%" height="100%" fill="#050300"/>
+  
+  <g fill="#ffb000" font-family="'Courier New', Courier, monospace, monospace">
+    
+    <g>
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0.5 0; 0 0; -0.5 0.2; 0 0" keyTimes="0; 0.1; 0.2; 0.3; 1" dur="5s" repeatCount="indefinite"/>
 
-  <rect width="100%" height="100%" fill="#050300"/>
-  
-  <g filter="url(#sharp-glow)" fill="#ffb000" stroke="#ffb000" font-family="'Courier New', Courier, monospace, monospace">
-    
-    <g>
-        <animateTransform attributeName="transform" type="translate" values="0 0; 0.5 0; 0 0; -0.5 0.2; 0 0" keyTimes="0; 0.1; 0.2; 0.3; 1" dur="5s" repeatCount="indefinite"/>
+                <g transform="translate(150, 70)" opacity="0.8">
+            <line x1="0" y1="0" x2="900" y2="0" stroke="#ffb000" stroke-width="2" stroke-dasharray="4 4"/>
+            <text x="0" y="-10" text-anchor="start" font-size="14" font-weight="bold">RUNG 0: |--[ ]----( )--|</text>
+                        <text x="890" y="-10" text-anchor="end" font-size="14" font-weight="bold">SCAN TIME: &lt;1ms | LOGIC_OK</text>
+        </g>
 
-        <g transform="translate(150, 70)" stroke-width="2" opacity="0.8">
-            <line x1="0" y1="0" x2="900" y2="0" stroke-dasharray="4 4"/>
-            <text x="0" y="-10" text-anchor="start" font-size="14" font-weight="bold" stroke="none">RUNG 0: |--[ ]----( )--|</text>
-            <text x="890" y="-10" text-anchor="end" font-size="14" font-weight="bold" stroke="none">SYS.STATUS: ONLINE | NOMINAL</text>
-        </g>
+        <g transform="translate(550, 115)">
+            <rect x="0" y="0" width="100" height="100" rx="5" fill="none" stroke="#ffb000" stroke-width="6"/>
+            <path d="M20 50 L40 50 L40 30 L60 30 L60 70 L80 70" fill="none" stroke="#ffb000" stroke-width="8" stroke-linecap="square"/>
+        </g>
 
-        <g transform="translate(550, 115)">
-            <rect x="0" y="0" width="100" height="100" rx="5" fill="none" stroke-width="6"/>
-            <path d="M20 50 L40 50 L40 30 L60 30 L60 70 L80 70" fill="none" stroke-width="8" stroke-linecap="square"/>
-        </g>
+        <text x="600" y="320" text-anchor="middle" font-size="72" font-weight="900" letter-spacing="4">SQUARE WAVE SYSTEMS</text>
 
-        <text x="600" y="320" text-anchor="middle" font-size="72" font-weight="900" letter-spacing="4" stroke="none">SQUARE WAVE SYSTEMS</text>
+        <text x="600" y="410" text-anchor="middle" font-size="38" font-weight="bold" letter-spacing="1" opacity="1">> MODERN INDUSTRIAL AUTOMATION SOFTWARE</text>
 
-        <text x="600" y="410" text-anchor="middle" font-size="38" font-weight="bold" letter-spacing="1" opacity="1" stroke="none">> MODERN INDUSTRIAL AUTOMATION SOFTWARE</text>
+        <g transform="translate(420, 455) scale(0.6)">
+            <path d="M0 50 L100 50 L100 0 L300 0 L300 100 L500 100 L500 50 L600 50" fill="none" stroke="#ffb000" stroke-width="10" stroke-linecap="square"/>
+        </g>
 
-        <g transform="translate(420, 455) scale(0.6)">
-            <path d="M0 50 L100 50 L100 0 L300 0 L300 100 L500 100 L500 50 L600 50" fill="none" stroke-width="10" stroke-linecap="square"/>
-        </g>
-
-         <g transform="translate(150, 560)" stroke-width="2" opacity="0.8">
-            <line x1="0" y1="0" x2="900" y2="0"/>
-            <text x="0" y="25" text-anchor="start" font-size="13" font-weight="bold" stroke="none">SCAN TIME: &lt;1ms | LOGIC_OK</text>
-             <text x="900" y="25" text-anchor="end" font-size="13" font-weight="bold" stroke="none">V. 1.0.4b</text>
-        </g>
-    </g>
-    
-    <g fill="none" stroke-width="6" stroke-linecap="square" opacity="0.8">
-      <path d="M40 100 L40 40 L100 40"/>
-      <path d="M1100 40 L1160 40 L1160 100"/>
-      <path d="M1160 530 L1160 590 L1100 590"/>
-      <path d="M100 590 L40 590 L40 530"/>
-    </g>
-  </g>
-  
-  <rect width="100%" height="100%" fill="url(#scanlines-subtle)" pointer-events="none"/>
-  <rect width="100%" height="100%" fill="url(#crt-vignette-wide)" pointer-events="none"/>
+                 <g transform="translate(150, 560)" opacity="0.8">
+            <line x1="0" y1="0" x2="900" y2="0" stroke="#ffb000" stroke-width="2"/>
+                        <text x="0" y="25" text-anchor="start" font-size="13" font-weight="bold">SYSTEM STATUS: NOMINAL</text>
+            <text x="900" y="25" text-anchor="end" font-size="13" font-weight="bold">V. 1.0.4b</text>
+        </g>
+    </g>
+    
+        <g fill="none" stroke="#AA7700" stroke-width="4" stroke-linecap="square" opacity="0.5">
+      <path d="M40 100 L40 40 L100 40"/>
+      <path d="M1100 40 L1160 40 L1160 100"/>
+      <path d="M1160 530 L1160 590 L1100 590"/>
+      <path d="M100 590 L40 590 L40 530"/>
+    </g>
+  </g>
+  
+  <rect width="100%" height="100%" fill="url(#scanlines-subtle)" pointer-events="none"/>
+  <rect width="100%" height="100%" fill="url(#crt-vignette-wide)" pointer-events="none"/>
 
 </svg>

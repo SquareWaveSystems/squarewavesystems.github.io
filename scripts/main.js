@@ -69,7 +69,8 @@ function copyEmail() {
 
     navigator.clipboard.writeText(email).then(function() {
         clickMsg.textContent = "[ COPIED_TO_CLIPBOARD ]";
-        clickMsg.style.color = "var(--green)";
+        // Use theme-appropriate high contrast so the hint stays visible on hover
+        clickMsg.style.color = "var(--bg-deep)";
         emailTrigger.style.borderColor = "var(--green)";
 
         setTimeout(function() {

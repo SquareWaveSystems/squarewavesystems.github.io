@@ -54,7 +54,7 @@
       "sameAs": [
         "https://github.com/SquareWaveSystems/"
       ],
-      "foundingDate": "2025",
+      "foundingDate": "2025-01-01",
       "areaServed": {
         "@type": "Place",
         "name": "Worldwide"
@@ -293,9 +293,12 @@
                         
                         <div class="waitlist-inline">
                             <p style="margin: 1.5rem 0 0.5rem 0; font-size: 0.9rem; color: var(--text-main);">Want early access?</p>
-                            <form class="waitlist-form" action="https://github.us11.list-manage.com/subscribe/post" method="POST" target="_blank">
+                            <form class="waitlist-form" action="https://github.us11.list-manage.com/subscribe/post" method="POST" target="_blank" rel="noopener noreferrer">
                                 <input type="email" name="EMAIL" placeholder="your.email@company.com" required aria-label="Email for waitlist">
                                 <input type="hidden" name="INTEREST" value="Factory Layout Planner">
+                                <!-- Note: Add your Mailchimp list ID here when ready -->
+                                <input type="hidden" name="u" value="">
+                                <input type="hidden" name="id" value="">
                                 <button type="submit">Join Waitlist</button>
                             </form>
                         </div>
@@ -531,8 +534,11 @@
                 <div class="newsletter-box">
                     <h3>Stay Updated</h3>
                     <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Get notified when we launch new tools and publish automation engineering insights.</p>
-                    <form class="newsletter-form" id="newsletter-form" action="https://github.us11.list-manage.com/subscribe/post" method="POST" target="_blank">
+                    <form class="newsletter-form" id="newsletter-form" action="https://github.us11.list-manage.com/subscribe/post" method="POST" target="_blank" rel="noopener noreferrer">
                         <input type="email" name="EMAIL" placeholder="your.email@company.com" required aria-label="Email address">
+                        <!-- Note: Add your Mailchimp list ID here when ready -->
+                        <input type="hidden" name="u" value="">
+                        <input type="hidden" name="id" value="">
                         <button type="submit" class="btn-newsletter">Subscribe</button>
                     </form>
                     <p class="privacy-note">No spam. Unsubscribe anytime. We respect your privacy.</p>

@@ -67,18 +67,28 @@ function copyEmail() {
 
     if (!email) return;
 
-    navigator.clipboard.writeText(email).then(function() {
-        clickMsg.textContent = "[ COPIED_TO_CLIPBOARD ]";
-        // Use theme-appropriate high contrast so the hint stays visible on hover
-        clickMsg.style.color = "var(--bg-deep)";
-        emailTrigger.style.borderColor = "var(--green)";
+    // Optimistically show feedback even before clipboard resolves
+    clickMsg.textContent = "[ COPYING... ]";
+    clickMsg.style.color = "var(--bg-deep)";
+    emailTrigger.style.borderColor = "var(--green)";
 
-        setTimeout(function() {
-            clickMsg.textContent = "[ CLICK_TO_COPY_ADDRESS ]";
-            clickMsg.style.color = "var(--text-muted)";
-            emailTrigger.style.borderColor = "var(--amber-dim)";
-        }, 2000);
-    });
+    navigator.clipboard.writeText(email)
+        .then(function() {
+            clickMsg.textContent = "[ COPIED_TO_CLIPBOARD ]";
+            clickMsg.style.color = "var(--bg-deep)"; // high contrast on green hover state
+        })
+        .catch(function() {
+            // Graceful fallback if clipboard permission is denied
+            clickMsg.textContent = "[ COPY_NOT_ALLOWED ]";
+            clickMsg.style.color = "var(--amber-bright)";
+        })
+        .finally(function() {
+            setTimeout(function() {
+                clickMsg.textContent = "[ CLICK_TO_COPY_ADDRESS ]";
+                clickMsg.style.color = "var(--text-muted)";
+                emailTrigger.style.borderColor = "var(--amber-dim)";
+            }, 2000);
+        });
 }
 
 if(emailTrigger) {

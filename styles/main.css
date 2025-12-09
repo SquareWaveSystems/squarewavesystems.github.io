@@ -155,10 +155,7 @@ body::before {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Bloom */
-h2, h3, .glow-text {
-    text-shadow: 0 0 8px var(--amber-glow), 0 0 15px rgba(255, 158, 31, 0.2);
-}
+/* Bloom - removed for cleaner look */
 
 /* --- Layout Utilities --- */
 .container {
@@ -237,8 +234,7 @@ p {
     border: 2px solid var(--amber-bright);
     z-index: 100;
     pointer-events: none;
-    opacity: 0.8;
-    box-shadow: 0 0 10px var(--amber-glow);
+    opacity: 0.6;
 }
 .tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
 .tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
@@ -249,8 +245,8 @@ p {
     display: inline-flex;
     align-items: center;
     padding: 0.8rem 1.5rem;
-    background: rgba(255, 158, 31, 0.05);
-    border: 1px solid var(--amber-bright);
+    background: rgba(255, 140, 0, 0.08);
+    border: 2px solid var(--amber-bright);
     color: var(--amber-bright);
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 600;
@@ -262,7 +258,6 @@ p {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(255, 158, 31, 0.1);
 }
 
 .btn::before { content: '> '; margin-right: 0.5rem; }
@@ -287,7 +282,6 @@ p {
     background: var(--green);
     color: var(--bg-deep);
     border-color: var(--green);
-    box-shadow: 0 0 20px var(--green-glow);
 }
 
 /* --- Navigation --- */
@@ -338,7 +332,6 @@ nav {
 .logo svg {
     width: 28px;
     height: 28px;
-    filter: drop-shadow(0 0 5px var(--amber-glow));
 }
 
 .nav-links {
@@ -358,7 +351,6 @@ nav {
 
 .nav-links a:hover {
     color: var(--amber-bright);
-    text-shadow: 0 0 8px var(--amber-glow);
 }
 
 /* --- Glitch Keyframes (Standard 3px offset) --- */
@@ -376,39 +368,27 @@ nav {
     color: var(--amber-bright) !important;
     font-weight: 600;
     position: relative;
-    text-shadow: 0 0 5px var(--amber-glow);
     transition: all 0.15s ease;
     padding: 0.4rem 0.8rem;
     margin: -0.4rem -0.8rem;
     border: 1px solid transparent;
 }
 
-/* Contact Hover (Intense glow + scale + border) */
+/* Contact Hover (subtle glitch + border) */
 .nav-contact-glitch:hover {
     animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-    filter: drop-shadow(0 0 25px var(--amber-glow));
-    text-shadow: 0 0 10px var(--amber-bright), 0 0 20px var(--amber-glow), 0 0 40px var(--amber-glow);
-    background: rgba(255, 158, 31, 0.1);
+    background: rgba(255, 140, 0, 0.1);
     border-color: var(--amber-bright);
-    box-shadow: 0 0 20px var(--amber-glow), inset 0 0 15px rgba(255, 158, 31, 0.1);
-    transform: scale(1.05);
 }
 
-/* --- Logo Hover (Aggressive Match to Main Title) --- */
+/* --- Logo Hover --- */
 .logo:hover .logo-text {
     animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-    color: var(--amber-bright);
-    filter: drop-shadow(0 0 20px var(--amber-glow));
 }
 
-.logo:hover svg {
-    filter: drop-shadow(0 0 15px var(--amber-glow));
-}
-
-/* Title Hover (Big Glow + Glitch) */
+/* Title Hover (Glitch effect) */
 .h1-link:hover h1 {
     animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-    filter: drop-shadow(0 0 20px var(--amber-glow));
 }
 
 /* --- Mobile Menu --- */
@@ -530,87 +510,14 @@ nav {
         linear-gradient(90deg, rgba(0, 136, 153, 0.08) 1px, transparent 1px);
 }
 
-/* Reduce glow intensity in light theme */
-[data-theme="light"] h2,
-[data-theme="light"] h3,
-[data-theme="light"] .glow-text {
-    text-shadow: none;
-}
-
-[data-theme="light"] h1 {
-    text-shadow: none;
-}
-
-[data-theme="light"] .logo svg {
-    filter: none;
-}
-
-[data-theme="light"] .service-icon {
-    filter: none;
-}
-
-[data-theme="light"] .corner-frame {
-    box-shadow: none;
-    opacity: 0.6;
-}
-
-[data-theme="light"] .hero-wave path {
-    filter: none;
-}
-
+/* Light theme: reduce blink-dot glow */
 [data-theme="light"] .blink-dot {
     box-shadow: 0 0 4px var(--green);
 }
 
-[data-theme="light"] .h1-cursor {
-    box-shadow: none;
-}
-
-[data-theme="light"] .email-address {
-    text-shadow: none;
-}
-
-[data-theme="light"] .btn {
-    background: rgba(195, 90, 30, 0.08);
-    box-shadow: none;
-}
-
-[data-theme="light"] .btn:hover {
-    box-shadow: 0 0 10px var(--green-glow);
-}
-
-[data-theme="light"] .nav-contact-glitch {
-    text-shadow: none;
-}
-
-[data-theme="light"] .nav-contact-glitch:hover {
-    filter: none;
-    text-shadow: none;
-    box-shadow: 0 0 10px var(--amber-glow);
-}
-
-[data-theme="light"] .logo:hover .logo-text {
-    filter: none;
-}
-
-[data-theme="light"] .logo:hover svg {
-    filter: none;
-}
-
-[data-theme="light"] .h1-link:hover h1 {
-    filter: none;
-}
-
+/* Light theme: subtle hover effects */
 [data-theme="light"] .service-card:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="light"] .email-block {
-    box-shadow: none;
-}
-
-[data-theme="light"] .email-block:hover {
-    box-shadow: 0 0 10px var(--green-glow);
 }
 
 .mobile-nav.active {
@@ -630,7 +537,6 @@ nav {
 
 .mobile-nav a:hover {
     color: var(--amber-bright);
-    text-shadow: 0 0 10px var(--amber-glow);
 }
 
 /* --- Hero Section --- */
@@ -701,7 +607,7 @@ nav {
     width: 8px; height: 8px;
     background-color: var(--green);
     border-radius: 50%;
-    box-shadow: 0 0 8px var(--green);
+    box-shadow: 0 0 4px var(--green);
     animation: blink 2s infinite;
 }
 
@@ -720,7 +626,6 @@ nav {
     stroke: var(--amber-bright);
     stroke-width: 2.5;
     fill: none;
-    filter: drop-shadow(0 0 6px var(--amber-glow));
 
     /* Width calculation matches the extended SVG width */
     stroke-dasharray: 3000;
@@ -771,7 +676,6 @@ nav {
     color: var(--amber-bright);
     width: 32px; height: 32px;
     margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 5px var(--amber-glow));
 }
 
 /* --- Products Section --- */
@@ -836,7 +740,6 @@ nav {
 .manifesto p.highlight {
     color: var(--amber-bright);
     font-weight: 500;
-    text-shadow: 0 0 5px var(--amber-glow);
 }
 
 .values-list {
@@ -903,20 +806,18 @@ nav {
 
 .email-block {
     margin-top: 2rem;
-    border: 1px solid var(--amber-bright);
-    background: rgba(255, 158, 31, 0.05);
+    border: 2px solid var(--amber-bright);
+    background: rgba(255, 140, 0, 0.05);
     padding: 1.5rem;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s;
     position: relative;
-    box-shadow: 0 0 10px rgba(255, 158, 31, 0.1);
 }
 
 .email-block:hover {
     background: var(--green);
     border-color: var(--green);
-    box-shadow: 0 0 20px var(--green-glow);
 }
 
 .email-block:hover .email-address {
@@ -933,7 +834,6 @@ nav {
     color: var(--amber-bright);
     display: block;
     margin-bottom: 0.5rem;
-    text-shadow: 0 0 5px var(--amber-glow);
     text-decoration: none;
     word-break: break-all;
     overflow-wrap: break-word;
@@ -1023,6 +923,27 @@ footer {
         margin-left: 0;
         width: 36px;
         height: 36px;
+    }
+
+    /* Squish hero to ensure button is visible without scrolling */
+    .hero {
+        min-height: auto;
+        padding: 6rem 0 4rem;
+    }
+
+    .hero-wave-container {
+        height: 50px;
+        margin: 0.5rem auto 1rem;
+    }
+
+    .status-pill {
+        margin-bottom: 1rem;
+    }
+
+    /* Make button more prominent on mobile */
+    .btn {
+        background: rgba(255, 140, 0, 0.15);
+        border-width: 2px;
     }
 }
 

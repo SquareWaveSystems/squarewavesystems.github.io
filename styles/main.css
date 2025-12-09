@@ -628,7 +628,6 @@ nav {
     margin: 1rem auto 2rem;
     position: relative;
     overflow: hidden;
-    cursor: pointer;
 }
 
 .hero-wave path {
@@ -641,16 +640,6 @@ nav {
     stroke-dashoffset: 3000;
 
     /* Plays once on load */
-    animation: drawWave 2.5s ease-out forwards;
-}
-
-/* Reanimate on hover */
-.hero-wave-container:hover .hero-wave path {
-    animation: none;
-    stroke-dashoffset: 3000;
-}
-
-.hero-wave-container:hover .hero-wave path {
     animation: drawWave 2.5s ease-out forwards;
 }
 

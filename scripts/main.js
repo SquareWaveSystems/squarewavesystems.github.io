@@ -150,3 +150,62 @@ if (heroTitleLink) {
         e.preventDefault();
     });
 }
+
+// Sneaky glitch word effect
+(function() {
+    const glitchWord = document.getElementById('glitch-word');
+    if (!glitchWord) return;
+
+    const words = ['weird', 'curly', 'rad', 'funky', 'gnarly', 'spicy', 'crunchy', 'wobbly'];
+    const baseWord = 'weird';
+    let currentWord = baseWord;
+
+    function glitchOut() {
+        // Pick a different word
+        let newWord;
+        do {
+            newWord = words[Math.floor(Math.random() * words.length)];
+        } while (newWord === currentWord);
+
+        // Glitch animation
+        glitchWord.classList.add('glitching');
+        
+        // Quick flicker through garbage characters
+        let flickers = 0;
+        const flickerInterval = setInterval(() => {
+            const glitchChars = '█▓▒░╳╱╲@#$%&*!?<>';
+            let garbled = '';
+            for (let i = 0; i < newWord.length; i++) {
+                garbled += glitchChars[Math.floor(Math.random() * glitchChars.length)];
+            }
+            glitchWord.textContent = garbled;
+            flickers++;
+            if (flickers >= 4) {
+                clearInterval(flickerInterval);
+                glitchWord.textContent = newWord;
+                currentWord = newWord;
+                
+                setTimeout(() => {
+                    glitchWord.classList.remove('glitching');
+                }, 100);
+
+                // Sometimes glitch back to 'weird' after a bit
+                if (newWord !== baseWord && Math.random() > 0.3) {
+                    setTimeout(glitchOut, 800 + Math.random() * 1200);
+                }
+            }
+        }, 50);
+    }
+
+    // Schedule random glitches
+    function scheduleGlitch() {
+        const delay = 8000 + Math.random() * 15000; // 8-23 seconds
+        setTimeout(() => {
+            glitchOut();
+            scheduleGlitch();
+        }, delay);
+    }
+
+    // Start after a random initial delay
+    setTimeout(scheduleGlitch, 5000 + Math.random() * 10000);
+})();

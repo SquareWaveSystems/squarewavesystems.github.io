@@ -997,3 +997,24 @@ footer {
         padding: 0.5rem 0.75rem;
     }
 }
+
+/* Sneaky glitch word effect */
+.glitch-word {
+    display: inline-block;
+    position: relative;
+}
+
+.glitch-word.glitching {
+    animation: glitch-shake 0.1s linear infinite;
+    color: var(--cyan);
+    text-shadow: 
+        -1px 0 var(--amber-bright),
+        1px 0 var(--green);
+}
+
+@keyframes glitch-shake {
+    0%, 100% { transform: translate(0); }
+    25% { transform: translate(-2px, 1px); }
+    50% { transform: translate(2px, -1px); }
+    75% { transform: translate(-1px, -1px); }
+}

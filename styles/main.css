@@ -20,6 +20,8 @@
     --text-main: #e0e0e0;
     --text-muted: #a0a0a0; /* Bumped from #808080 for WCAG AA compliance */
     --text-dark: #000000;
+    --bg-terminal: #0a0a0a;
+    --terminal-title-bg: #2a2a2a;
 
     /* CRT overlay opacity (differs per theme) */
     --crt-scanline-opacity: 0.25;
@@ -48,6 +50,8 @@
     --bg-deep: #f4f3f0;
     --bg-panel: #eae9e4;
     --bg-card: #e0dfda;
+    --bg-terminal: #2a2a2a;
+    --terminal-title-bg: #4a4a4a;
 
     /* Grid - subtle orange tint */
     --grid-line: rgba(214, 90, 0, 0.05);
@@ -770,7 +774,7 @@ nav {
 
 /* --- Contact Terminal --- */
 .terminal-box {
-    background: #000;
+    background: var(--bg-terminal);
     border: 1px solid var(--text-muted);
     padding: 0;
     font-family: 'IBM Plex Mono', monospace;
@@ -782,8 +786,8 @@ nav {
 }
 
 .term-title-bar {
-    background: var(--text-muted);
-    color: #000;
+    background: var(--terminal-title-bg);
+    color: var(--text-dark);
     padding: 0.5rem 1rem;
     font-size: 0.75rem;
     display: flex;

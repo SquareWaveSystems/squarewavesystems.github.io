@@ -114,3 +114,20 @@ document.querySelectorAll('section h2, section > .container > p, .service-card, 
     el.classList.add('reveal');
     observer.observe(el);
 });
+
+// Add delay to establish connection button scroll to show green state
+const establishConnectionBtn = document.querySelector('.hero .btn[href="#contact"]');
+if (establishConnectionBtn) {
+    establishConnectionBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+
+        // Wait 400ms to let user see the green hover state
+        setTimeout(() => {
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 400);
+    });
+}

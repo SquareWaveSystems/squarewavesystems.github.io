@@ -786,6 +786,11 @@ nav {
     justify-content: space-between;
     align-items: center;
     font-weight: 700;
+    gap: 0.5rem;
+}
+
+.term-title-bar > span {
+    white-space: nowrap;
 }
 
 .term-body {
@@ -962,7 +967,7 @@ footer {
 
     /* Make button more prominent on mobile */
     .btn {
-        background: rgba(255, 140, 0, 0.15);
+        background: rgba(255, 140, 0, 0.25);
         border-width: 2px;
     }
 }
@@ -974,5 +979,9 @@ footer {
     }
     .term-body {
         padding: 1.5rem;
+    }
+    .term-title-bar {
+        font-size: 0.65rem;
+        padding: 0.5rem 0.75rem;
     }
 }

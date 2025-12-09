@@ -12,8 +12,8 @@
     --bg-panel: #0a0a0a;
     --bg-card: #111111;
 
-    /* Dull Alien Green Grid */
-    --grid-line: rgba(0, 255, 136, 0.04);
+    /* Cyan Grid (matching iso grid blue) */
+    --grid-line: rgba(0, 212, 255, 0.04);
 
     --border-dim: #2a2a2a;
 

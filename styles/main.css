@@ -42,9 +42,9 @@
     /* Accent - Teal (consistent with dark theme) */
     --cyan: #008899;
 
-    /* Secondary - Deep Green (consistent with dark theme) */
-    --green: #008855;
-    --green-glow: rgba(0, 136, 85, 0.22);
+    /* Secondary - Muted Forest Green (subdued for light theme) */
+    --green: #2d6a4f;
+    --green-glow: rgba(45, 106, 79, 0.20);
 
     /* Backgrounds - Warm light grey */
     --bg-deep: #f4f3f0;

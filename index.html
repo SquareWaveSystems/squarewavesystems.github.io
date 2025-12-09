@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Square Wave Systems | Industrial Automation Software</title>
-    <meta name="description" content="Modern software tools for niche problems in industrial automation.">
+    <meta name="description" content="Professional industrial automation software: PLC version control for Omron Sysmac, IIoT cloud integration, and browser-based digital twins. Modern DevOps tools for factory automation engineers in Australia.">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://squarewavesystems.github.io/">
@@ -13,7 +13,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://squarewavesystems.github.io/">
     <meta property="og:title" content="Square Wave Systems | Industrial Automation Software">
-    <meta property="og:description" content="Modern software tools for niche problems in manufacturing and factory automation.">
+    <meta property="og:description" content="Professional industrial automation software: PLC version control, IIoT integration, and digital twins. Modern DevOps tools for factory automation engineers.">
     <meta property="og:image" content="https://squarewavesystems.github.io/images/social-preview.png">
     <meta property="og:locale" content="en_AU">
     <meta property="og:site_name" content="Square Wave Systems">
@@ -22,13 +22,53 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://squarewavesystems.github.io/">
     <meta name="twitter:title" content="Square Wave Systems | Industrial Automation Software">
-    <meta name="twitter:description" content="Modern software tools for niche problems in manufacturing and factory automation.">
+    <meta name="twitter:description" content="Professional industrial automation software: PLC version control, IIoT integration, and digital twins. Modern DevOps tools for factory automation engineers.">
     <meta name="twitter:image" content="https://squarewavesystems.github.io/images/social-preview.png">
 
     <!-- Additional SEO -->
     <meta name="author" content="Square Wave Systems Pty Ltd">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#ff9e1f">
+    <meta name="keywords" content="industrial automation software, PLC version control, factory automation, IIoT integration, digital twin, automation engineering tools, Omron Sysmac, IEC 61131-3, SCADA integration, manufacturing software">
+    
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Square Wave Systems Pty Ltd",
+      "url": "https://squarewavesystems.github.io/",
+      "logo": "https://squarewavesystems.github.io/images/social-preview.png",
+      "description": "Modern software tools for niche problems in industrial automation. We bridge the gap between cutting-edge development and factory floor reality.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Gold Coast",
+        "addressRegion": "QLD",
+        "addressCountry": "AU"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "hello@squarewavesystems.com.au",
+        "contactType": "Sales"
+      },
+      "sameAs": [
+        "https://github.com/SquareWaveSystems/"
+      ],
+      "foundingDate": "2025",
+      "areaServed": {
+        "@type": "Place",
+        "name": "Worldwide"
+      },
+      "knowsAbout": [
+        "Industrial Automation",
+        "PLC Programming",
+        "IIoT Integration",
+        "Digital Twins",
+        "Factory Automation",
+        "Version Control Systems"
+      ]
+    }
+    </script>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
@@ -39,7 +79,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet"></noscript>
     <link rel="stylesheet" href="styles/main.css">
     <!-- Prevent flash of wrong theme -->
     <script>
@@ -73,7 +114,7 @@
         <ul class="nav-links">
             <li><a href="#capabilities">Capabilities</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#faq">FAQ</a></li>
             <li><a href="#contact" class="nav-contact-glitch">Contact</a></li>
         </ul>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -106,7 +147,7 @@
     <div class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
         <a href="#capabilities">Capabilities</a>
         <a href="#projects">Projects</a>
-        <a href="#philosophy">Philosophy</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
     </div>
 
@@ -131,6 +172,14 @@
                 
                 <div style="margin-top: 3rem;">
                     <a href="#contact" class="btn">establish connection<span class="btn-cursor" aria-hidden="true"></span></a>
+                </div>
+                
+                <!-- Scroll Indicator -->
+                <div class="scroll-indicator" aria-hidden="true">
+                    <span>Scroll to explore</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M19 12l-7 7-7-7"/>
+                    </svg>
                 </div>
             </div>
         </section>
@@ -242,6 +291,15 @@
                         <p>A lightweight, browser-based tool for sketching factory floors. Rapidly prototype layouts and visualise machinery placement in real-time.</p>
                         <p>Built because CAD is too slow for brainstorming, and enterprise digital twin software is too expensive for small shops.</p>
                         
+                        <div class="waitlist-inline">
+                            <p style="margin: 1.5rem 0 0.5rem 0; font-size: 0.9rem; color: var(--text-main);">Want early access?</p>
+                            <form class="waitlist-form" action="https://github.us11.list-manage.com/subscribe/post" method="POST" target="_blank">
+                                <input type="email" name="EMAIL" placeholder="your.email@company.com" required aria-label="Email for waitlist">
+                                <input type="hidden" name="INTEREST" value="Factory Layout Planner">
+                                <button type="submit">Join Waitlist</button>
+                            </form>
+                        </div>
+                        
                         <div class="tech-tags">
                             <span class="tag">React</span>
                             <span class="tag">Three.js</span>
@@ -339,16 +397,71 @@
             </div>
         </section>
 
+        <section id="social-proof">
+            <div class="container">
+                <span class="mono-label">Trust</span>
+                <h2>Built for Engineers, By Engineers</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years Combined Experience</div>
+                        <p>Deep expertise in industrial automation, PLC programming, and modern software development.</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Bootstrapped & Independent</div>
+                        <p>No investors to please. We build tools we'd use ourselves, not what VCs want to see.</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Industrial-Grade Reliability</div>
+                        <p>We understand uptime matters. Our tools are built with the same rigor as factory floor systems.</p>
+                    </div>
+                </div>
+                
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        <div>
+                            <h4>Australian Based</h4>
+                            <p>Local support in AEST timezone for Australian manufacturers.</p>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <div>
+                            <h4>Open Standards</h4>
+                            <p>Built on Git, IEC 61131-3, and industry-standard protocols. No vendor lock-in.</p>
+                        </div>
+                    </div>
+                    <div class="trust-item">
+                        <svg class="trust-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                        <div>
+                            <h4>Security Focused</h4>
+                            <p>We understand OT/IT convergence risks. Security is built in, not bolted on.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="philosophy">
             <div class="container">
                 <span class="mono-label">Philosophy</span>
-                <h2>About Us</h2>
+                <h2>Why We Exist</h2>
                 
                 <div class="philosophy-layout">
                     <div class="manifesto">
-                        <p class="highlight">Square Wave Systems is a bootstrapped software shop based on the Gold Coast, Australia. We are engineers building the tools we want to use ourselves.</p>
-                        <p>Industrial automation deserves better software. For too long, the industry has relied on clunky, expensive, proprietary suites that feel like they were designed in Windows 95.</p>
-                        <p>We combine deep domain expertise in industrial automation with modern software engineering. We respect the reliability of the old hardware, but we demand the usability of modern software.</p>
+                        <p class="highlight">You deserve modern software that doesn't make you want to throw your laptop out the window.</p>
+                        <p>We've been where you are: frustrated by clunky PLC software, wrestling with binary file formats that can't be version controlled, emailing ZIP files around the team, and duct-taping together brittle scripts to get data out of your machines.</p>
+                        <p>That's why we're building the automation engineering tools we wish existed. Tools that respect your intelligence, integrate with modern workflows, and don't cost enterprise software prices.</p>
                     </div>
                     
                     <ul class="values-list">
@@ -369,11 +482,61 @@
             </div>
         </section>
 
+        <section id="faq">
+            <div class="container">
+                <span class="mono-label">FAQ</span>
+                <h2>Common Questions</h2>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>Who are your typical clients?</h3>
+                        <p>Automation engineers, controls integrators, and manufacturing facilities in Australia and worldwide who are tired of outdated tooling and want modern DevOps practices in their OT environment.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Do you offer custom development?</h3>
+                        <p>Yes. We take on select projects that align with our expertise in industrial automation, IIoT integration, and engineering tools. Email us to discuss your specific needs.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>What's your pricing model?</h3>
+                        <p>It depends on the project. Our tools range from open-source (free) to commercial licenses for enterprise features. Custom development is quoted per project. Contact us for specifics.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Do you support PLCs other than Omron?</h3>
+                        <p>Currently focused on Omron Sysmac, but we're exploring support for Siemens, Allen-Bradley, and others. Join our newsletter to stay updated.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Can you help integrate our factory systems?</h3>
+                        <p>Absolutely. We specialize in bridging OT and IT systems: connecting PLCs, SCADA, MES, and cloud platforms with modern APIs and protocols.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>What's your typical project timeline?</h3>
+                        <p>Most integrations take 2-8 weeks. Custom tool development varies. We prefer focused, iterative projects over long enterprise engagements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="contact">
             <div class="container">
                 <span class="mono-label">Contact</span>
                 <h2>Establish Connection</h2>
-                <p>Have a weird automation problem? Let's talk.</p>
+                <p>Have a weird automation problem? Let's talk. Or subscribe to get updates on our projects and automation insights.</p>
+                
+                <!-- Newsletter Signup -->
+                <div class="newsletter-box">
+                    <h3>Stay Updated</h3>
+                    <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Get notified when we launch new tools and publish automation engineering insights.</p>
+                    <form class="newsletter-form" id="newsletter-form" action="https://github.us11.list-manage.com/subscribe/post" method="POST" target="_blank">
+                        <input type="email" name="EMAIL" placeholder="your.email@company.com" required aria-label="Email address">
+                        <button type="submit" class="btn-newsletter">Subscribe</button>
+                    </form>
+                    <p class="privacy-note">No spam. Unsubscribe anytime. We respect your privacy.</p>
+                </div>
                 
                 <div class="terminal-box">
                     <div class="term-title-bar">

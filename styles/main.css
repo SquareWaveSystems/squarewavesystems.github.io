@@ -648,6 +648,35 @@ nav {
     to { stroke-dashoffset: 0; }
 }
 
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.scroll-indicator svg {
+    width: 24px;
+    height: 24px;
+    color: var(--amber-bright);
+}
+
+@keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
 /* --- Services Grid --- */
 .services-grid {
     display: grid;
@@ -873,6 +902,231 @@ nav {
     animation: blink 1s step-end infinite;
 }
 
+/* Newsletter Signup */
+.newsletter-box {
+    background: var(--bg-panel);
+    border: 2px solid var(--border-dim);
+    padding: 2.5rem;
+    margin: 3rem auto;
+    max-width: 700px;
+}
+
+.newsletter-box h3 {
+    color: var(--cyan);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.newsletter-form input[type="email"] {
+    flex: 1;
+    padding: 0.8rem 1.2rem;
+    background: var(--bg-deep);
+    border: 2px solid var(--border-dim);
+    color: var(--text-main);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.95rem;
+    transition: border-color 0.3s;
+}
+
+.newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--cyan);
+}
+
+.newsletter-form input[type="email"]::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+}
+
+.btn-newsletter {
+    padding: 0.8rem 2rem;
+    background: var(--cyan);
+    color: var(--bg-deep);
+    border: 2px solid var(--cyan);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-newsletter:hover {
+    background: var(--green);
+    border-color: var(--green);
+}
+
+.privacy-note {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+/* Social Proof Section */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.stat-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-dim);
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--cyan);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--amber-bright);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+}
+
+.stat-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.trust-indicators {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.trust-item {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.trust-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--green);
+    flex-shrink: 0;
+}
+
+.trust-item h4 {
+    color: var(--text-main);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.trust-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* Waitlist Form */
+.waitlist-inline {
+    margin: 1rem 0;
+}
+
+.waitlist-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.waitlist-form input[type="email"] {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    background: var(--bg-deep);
+    border: 1px solid var(--border-dim);
+    color: var(--text-main);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    transition: border-color 0.3s;
+}
+
+.waitlist-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--green);
+}
+
+.waitlist-form input[type="email"]::placeholder {
+    color: var(--text-muted);
+    opacity: 0.5;
+}
+
+.waitlist-form button {
+    padding: 0.6rem 1.5rem;
+    background: var(--green);
+    color: var(--bg-deep);
+    border: 1px solid var(--green);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.waitlist-form button:hover {
+    background: var(--cyan);
+    border-color: var(--cyan);
+}
+
+/* FAQ Section */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.faq-item {
+    background: var(--bg-panel);
+    border-left: 3px solid var(--amber-bright);
+    padding: 1.5rem;
+}
+
+.faq-item h3 {
+    font-size: 1rem;
+    color: var(--cyan);
+    margin-bottom: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+.faq-item p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: var(--text-muted);
+}
+
 /* --- Footer --- */
 footer {
     padding: 2.5rem 0;
@@ -966,6 +1220,30 @@ footer {
         padding: 6rem 0 4rem;
         /* Remove the mask fade effect on mobile - it was making the button appear faded */
         mask-image: none;
+    }
+    
+    .scroll-indicator {
+        display: none;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+    }
+    
+    .newsletter-box {
+        padding: 1.5rem;
+    }
+    
+    .waitlist-form {
+        flex-direction: column;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .trust-indicators {
+        grid-template-columns: 1fr;
     }
 
     .hero-wave-container {

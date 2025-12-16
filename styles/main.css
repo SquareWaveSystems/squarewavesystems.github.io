@@ -648,6 +648,68 @@ nav {
     to { stroke-dashoffset: 0; }
 }
 
+/* --- Console Menu (Hero scroll hint) --- */
+.console-menu {
+    margin-top: 3rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    opacity: 0.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.console-prompt {
+    color: var(--amber-dim);
+    opacity: 0.7;
+}
+
+.console-item a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.console-item a:hover {
+    color: var(--cyan);
+    text-shadow: 0 0 8px var(--cyan);
+}
+
+.console-separator {
+    color: var(--border-dim);
+    opacity: 0.5;
+}
+
+.console-cursor {
+    color: var(--amber-dim);
+    animation: cursorBlink 1s step-end infinite;
+    font-size: 0.8em;
+}
+
+/* Mobile: stack console menu vertically */
+@media (max-width: 768px) {
+    .console-menu {
+        margin-top: 2rem;
+        flex-direction: column;
+        gap: 0.25rem;
+        opacity: 0.5;
+    }
+
+    .console-separator {
+        display: none;
+    }
+
+    .console-item::before {
+        content: '▸ ';
+        color: var(--amber-dim);
+        opacity: 0.6;
+    }
+}
+
 /* --- Services Grid --- */
 .services-grid {
     display: grid;

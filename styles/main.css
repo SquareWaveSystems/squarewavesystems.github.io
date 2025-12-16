@@ -710,6 +710,101 @@ nav {
     }
 }
 
+/* --- Scroll Indicator --- */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--amber-dim);
+    text-transform: uppercase;
+}
+
+.scroll-arrow {
+    display: flex;
+    flex-direction: column;
+    gap: -4px;
+    animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.chevron {
+    width: 20px;
+    height: 3px;
+    background: var(--amber-bright);
+    position: relative;
+    display: block;
+    margin-bottom: -6px;
+}
+
+.chevron::before,
+.chevron::after {
+    content: '';
+    position: absolute;
+    width: 51%;
+    height: 100%;
+    background: var(--amber-bright);
+    top: 0;
+}
+
+.chevron::before {
+    left: 0;
+    transform: skewY(25deg);
+    transform-origin: left top;
+}
+
+.chevron::after {
+    right: 0;
+    transform: skewY(-25deg);
+    transform-origin: right top;
+}
+
+.chevron:first-child {
+    opacity: 0.4;
+}
+
+@keyframes scrollBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(8px);
+    }
+}
+
+/* Mobile scroll indicator adjustments */
+@media (max-width: 768px) {
+    .scroll-indicator {
+        bottom: 1.5rem;
+        opacity: 0.6;
+    }
+
+    .scroll-text {
+        font-size: 0.6rem;
+    }
+
+    .chevron {
+        width: 16px;
+    }
+}
+
 /* --- Services Grid --- */
 .services-grid {
     display: grid;

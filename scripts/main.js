@@ -199,7 +199,7 @@ if (heroTitleLink) {
 
     // Schedule random glitches
     function scheduleGlitch() {
-        const delay = 8000 + Math.random() * 15000; // 8-23 seconds
+        const delay = 5000 + Math.random() * 10000; // 5-15 seconds
         setTimeout(() => {
             glitchOut();
             scheduleGlitch();

@@ -156,7 +156,7 @@ if (heroTitleLink) {
     const glitchWord = document.getElementById('glitch-word');
     if (!glitchWord) return;
 
-    const words = ['weird', 'curly', 'rad', 'funky', 'gnarly', 'spicy', 'crunchy', 'wobbly'];
+    const words = ['interesting', 'weird', 'curly', 'tricky', 'fun', 'gnarly', 'spicy', 'quirky', 'bizarre', 'peculiar'];
     const baseWord = 'weird';
     let currentWord = baseWord;
 

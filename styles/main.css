@@ -679,13 +679,13 @@ nav {
     opacity: 0.5;
 }
 
-/* Mobile: show console menu with vertical stack */
+/* Mobile: show console menu in one line */
 @media (max-width: 768px) {
     .console-menu {
         display: flex; /* Show only on mobile */
         margin-top: 2rem;
-        flex-direction: column;
-        gap: 0.25rem;
+        flex-direction: row;
+        gap: 0.4rem;
         opacity: 0.5;
     }
 
@@ -693,10 +693,14 @@ nav {
         display: none;
     }
 
-    .console-item::before {
-        content: '▸ ';
+    .console-item::after {
+        content: ' ▸';
         color: var(--amber-dim);
         opacity: 0.6;
+    }
+
+    .console-item:last-child::after {
+        content: '';
     }
 }
 
@@ -782,7 +786,7 @@ nav {
 /* Mobile scroll indicator adjustments */
 @media (max-width: 768px) {
     .scroll-indicator {
-        bottom: 1.5rem;
+        bottom: 5rem; /* Extra space for Safari URL bubble */
         opacity: 0.6;
     }
 

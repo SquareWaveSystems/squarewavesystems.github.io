@@ -786,7 +786,7 @@ nav {
 /* Mobile scroll indicator adjustments */
 @media (max-width: 768px) {
     .scroll-indicator {
-        bottom: 5rem; /* Extra space for Safari URL bubble */
+        bottom: 2rem;
         opacity: 0.6;
     }
 

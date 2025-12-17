@@ -648,24 +648,19 @@ nav {
     to { stroke-dashoffset: 0; }
 }
 
-/* --- Console Menu (Hero scroll hint) --- */
+/* --- Console Menu (Mobile-only nav hint) --- */
 .console-menu {
+    display: none; /* Hidden by default, shown only on mobile */
     margin-top: 3rem;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.08em;
     color: var(--text-muted);
     opacity: 0.6;
-    display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     flex-wrap: wrap;
-}
-
-.console-prompt {
-    color: var(--amber-dim);
-    opacity: 0.7;
 }
 
 .console-item a {
@@ -684,15 +679,10 @@ nav {
     opacity: 0.5;
 }
 
-.console-cursor {
-    color: var(--amber-dim);
-    animation: cursorBlink 1s step-end infinite;
-    font-size: 0.8em;
-}
-
-/* Mobile: stack console menu vertically */
+/* Mobile: show console menu with vertical stack */
 @media (max-width: 768px) {
     .console-menu {
+        display: flex; /* Show only on mobile */
         margin-top: 2rem;
         flex-direction: column;
         gap: 0.25rem;

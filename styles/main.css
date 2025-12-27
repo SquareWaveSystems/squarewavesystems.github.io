@@ -1000,8 +1000,7 @@ nav {
     display: block;
     margin-bottom: 0.5rem;
     text-decoration: none;
-    word-break: break-all;
-    overflow-wrap: break-word;
+    white-space: nowrap;
 }
 
 .email-address:hover {
